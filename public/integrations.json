@@ -1,0 +1,14 @@
+[
+{"name":"Google Ads","category":"Advertising","purpose":"Campaign reporting and conversions","status":"not-configured"},
+{"name":"Google Analytics 4","category":"Analytics","purpose":"Conversion measurement","status":"not-configured"},
+{"name":"Google Tag Manager","category":"Analytics","purpose":"Tag management","status":"not-configured"},
+{"name":"Meta Ads","category":"Advertising","purpose":"Campaign reporting","status":"not-configured"},
+{"name":"GoHighLevel","category":"CRM","purpose":"Lead sync","status":"not-configured"},
+{"name":"Odoo CRM","category":"CRM","purpose":"Lead and opportunity sync","status":"not-configured"},
+{"name":"Codestra Middleware","category":"Platform","purpose":"Canonical integration gateway","status":"not-configured"},
+{"name":"n8n","category":"Automation","purpose":"Workflow execution","status":"not-configured"},
+{"name":"WhatsApp Business","category":"Messaging","purpose":"Consented messaging","status":"not-configured"},
+{"name":"Klyrow / Amazon SES","category":"Email","purpose":"Transactional email","status":"not-configured"},
+{"name":"Telnexa","category":"SMS","purpose":"Consented SMS","status":"not-configured"},
+{"name":"Telephony","category":"Calls","purpose":"Inbound and outbound call tracking","status":"not-configured"}
+]

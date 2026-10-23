@@ -1,0 +1,29 @@
+{
+  "name": "codestra-grapes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "test": "node --test test/*.test.mjs",
+    "test:browser": "playwright test",
+    "format:check": "prettier --check src.jsx src test runtime vite.config.mjs playwright.config.mjs",
+    "start": "node runtime/server.mjs"
+  },
+  "dependencies": {
+    "dompurify": "3.4.17",
+    "grapesjs": "0.23.8",
+    "keycloak-js": "26.2.4",
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "prettier": "3.9.10",
+    "vite": "6.4.5"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
