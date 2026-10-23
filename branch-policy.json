@@ -1,0 +1,9 @@
+{
+  "subsection": "subsection/bootstrap-editor",
+  "section": "section/editor",
+  "requiredChecks": [
+    "editor-checks",
+    "branch-governance",
+    "container-smoke"
+  ]
+}

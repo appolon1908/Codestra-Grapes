@@ -15,7 +15,7 @@ npm run dev
 
 Without identity configuration, local drafting works and save/load remain disabled. Copy `.env.example` to a private local environment file and supply the approved staging settings. VITE_KEYCLOAK_URL, VITE_KEYCLOAK_REALM and VITE_KEYCLOAK_CLIENT_ID are public configuration, never secrets. Keycloak uses authorization-code + PKCE S256; access tokens stay in memory and refresh before API requests.
 
-Set CODESTRA_GATEWAY_ORIGIN to the approved staging gateway origin. The development proxy forwards only `/api/v1/marketing`, preserves the path, verifies TLS, and does not follow redirects. Loopback HTTP is allowed only for local test gateways. Do not target a backend or production host. In a static deployment, configure the hosting server's same-origin proxy to the existing Codestra gateway; Vite's development proxy is not included in the built files.
+Set CODESTRA_GATEWAY_ORIGIN to the approved staging gateway origin. The development proxy forwards only `/api/v1/marketing`, preserves the path, verifies TLS, and does not follow redirects. Loopback HTTP is allowed only for local test gateways. Do not target a backend or production host. The packaged Node server now provides this same-origin proxy. Build and run it with npm run build followed by npm start, or use the non-root Compose image. See [independent operation and saved-reference handoff](docs/RUNBOOK.md).
 
 ## Project behavior
 
@@ -40,4 +40,7 @@ npm run test:browser
 
 Browser tests use synthetic identity and intercepted project API responses to exercise the actual editor. They do not certify live Keycloak or Kong. On dev-desktop, `CHROME_BIN=/usr/bin/google-chrome npm run test:browser` uses the installed browser. See [verification](docs/VERIFICATION.md).
 
-Work is on an atomic bootstrap branch. The repository began empty. An empty subsection/bootstrap-editor commit supplies the first PR review base; all application files are proposed on the atomic branch. Preserve the untouched local starter worktree and require review before promotion. No main/development/testing/staging/production branches, protection settings, or deployments are created by the application. CODEOWNERS and CI are included; the observed repository ruleset list was empty. Require independent review and `Editor checks / editor-checks` before any promotion.
+Work is on an atomic bootstrap branch. The repository began empty. An empty subsection/bootstrap-editor commit supplies the first PR review base; all application files are proposed on the atomic branch. Preserve the untouched local starter worktree and require review before promotion. No deployment or production effects are activated by the application. CODEOWNERS and CI are included; active GitHub rulesets now require independent review, resolved review threads, current required checks and no force pushes on promotion branches. Require independent review and `Editor checks / editor-checks` before any promotion.
+
+
+Standalone startup and rollback: [runbook](docs/RUNBOOK.md). Branch enforcement: [governance](docs/GOVERNANCE.md). See [verification](docs/VERIFICATION.md) for observed checks and remaining integration gates.

@@ -19,7 +19,7 @@ test("list goes through gateway with bearer and refreshed tenant session", async
   assert.deepEqual(await api.list("grapes"), []);
   assert.equal(
     request.url,
-    "/api/v1/marketing/workspaces/tenant-a/projects?kind=grapes&limit=50&offset=0",
+    "/api/v1/marketing/workspaces/tenant-a/projects?kind=grapes&limit=50&offset=0&summary=true",
   );
   assert.equal(
     request.options.headers.Authorization,

@@ -1,3 +1,4 @@
+import { savedAuthoringReference } from "./handoff.mjs";
 import React, { useEffect, useMemo, useState } from "react";
 import { createProjectClient } from "./api.mjs";
 import {
@@ -94,6 +95,30 @@ export default function ProjectBar({
     setMessage("Saved version " + saved.version + ".");
     await refresh();
   }
+  async function exportReference() {
+    const session = await getSession();
+    const reference = savedAuthoringReference(active, session.tenantId, kind);
+    const blob = new Blob([JSON.stringify(reference, null, 2) + "\n"], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download =
+      kind +
+      "-" +
+      reference.source.projectId +
+      "-v" +
+      reference.source.revision +
+      ".json";
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setMessage(
+      "Exported saved version " +
+        reference.source.revision +
+        " reference. Review is required before publication.",
+    );
+  }
   return (
     <header className="project-bar">
       <strong>
@@ -148,6 +173,12 @@ export default function ProjectBar({
         onClick={() => action(save)}
       >
         Save project
+      </button>
+      <button
+        disabled={!signedIn || busy || !active}
+        onClick={() => action(exportReference)}
+      >
+        Export saved reference
       </button>
       <button disabled={!signedIn || busy} onClick={() => action(refresh)}>
         Refresh list

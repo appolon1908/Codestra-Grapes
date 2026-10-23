@@ -13,7 +13,7 @@ test("saved project listing can reach projects after the first page", async () =
   const projects = await api.list("grapes", 50);
   assert.equal(
     seen,
-    "/api/v1/marketing/workspaces/tenant-a/projects?kind=grapes&limit=50&offset=50",
+    "/api/v1/marketing/workspaces/tenant-a/projects?kind=grapes&limit=50&offset=50&summary=true",
   );
   assert.equal(projects[0].id, "project-51");
 });

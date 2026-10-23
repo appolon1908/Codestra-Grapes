@@ -54,7 +54,11 @@ export function createProjectClient({
       if (!Number.isSafeInteger(offset) || offset < 0)
         throw new Error("Invalid project offset.");
       return request(
-        "?kind=" + identifier(kind) + "&limit=50&offset=" + offset,
+        "?kind=" +
+          identifier(kind) +
+          "&limit=50&offset=" +
+          offset +
+          "&summary=true",
       );
     },
     get: async (id) => request("/" + identifier(id)),

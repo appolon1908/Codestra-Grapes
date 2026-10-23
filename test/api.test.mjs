@@ -8,9 +8,14 @@ const child = spawn(process.execPath, ["server/index.mjs"], {
 });
 const base = `http://127.0.0.1:${port}`;
 async function ready() {
-  for (let i = 0; i < 60; i++) {
+  const deadline = Date.now() + 60000;
+  while (Date.now() < deadline) {
+    if (child.exitCode !== null)
+      throw Error("server exited before becoming ready");
     try {
-      const r = await fetch(base + "/api/v1/health");
+      const r = await fetch(base + "/api/v1/health", {
+        signal: AbortSignal.timeout(2000),
+      });
       if (r.ok) return;
     } catch {}
     await new Promise((r) => setTimeout(r, 100));
@@ -20,7 +25,9 @@ async function ready() {
 test("health and API catalog; project CRUD fails closed", async () => {
   try {
     await ready();
-    let r = await fetch(base + "/api/v1/health");
+    let r = await fetch(base + "/api/v1/health", {
+      signal: AbortSignal.timeout(2000),
+    });
     assert.equal((await r.json()).productionEffects, false);
     r = await fetch(base + "/api/v1/integrations");
     assert.equal((await r.json()).length, 12);

@@ -6,3 +6,9 @@ dist/
 
 test-results/
 playwright-report/
+__pycache__/
+.local/
+.superpowers/
+*.log
+.env.*
+!.env.example
